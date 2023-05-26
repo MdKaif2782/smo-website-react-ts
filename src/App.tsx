@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import pepe from './pepe.png'
+import {db} from "./firebase";
+import {doc,setDoc} from 'firebase/firestore'
 
 function App() {
+  useEffect(()=>{
+    let dataDocumentReference = doc(db,"Admin","1");
+    setDoc(dataDocumentReference, {name: 'kaif ibn zaman'});
+  },[])
   return (
     <div className="App">
       <header className="App-header">
