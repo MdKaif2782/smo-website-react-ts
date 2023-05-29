@@ -1,8 +1,15 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import pepe from './pepe.png'
 import {db} from "./firebase";
 import {doc,setDoc} from 'firebase/firestore'
+import {HashRouter, Route, Routes} from "react-router-dom";
+import Profile from "./components/Profile";
+import Works from "./components/Works";
+import Help from "./components/Help";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Home from "./components/Home";
+import NotFound from "./components/NotFound";
 
 function App() {
   useEffect(()=>{
@@ -10,22 +17,17 @@ function App() {
     setDoc(dataDocumentReference, {name: 'kaif ibn zaman'});
   },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={pepe} className="App-logo" alt="logo" />
-        <p>
-          <code>UI</code> er Kaj choltese vai wait koren
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <HashRouter>
+        <Routes>
+          <Route path="profile" element={<Profile />} />
+          <Route path="works" element={<Works />} />
+          <Route path="help" element={<Help />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </HashRouter>
   );
 }
 
